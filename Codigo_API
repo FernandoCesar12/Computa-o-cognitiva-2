@@ -1,0 +1,22 @@
+import sys
+import requests
+
+def main(dict):
+
+    print(dict)
+        
+    try:
+        req = requests.get('https://brasilapi.com.br/api/cep/v1/' + dict['cep'])
+            
+        data = req.json()
+            
+        return {
+            'err': False,
+            'cidade': data['city'],
+            'rua': data['street'],
+            'estado': data['state'],
+            'bairro': data['neighborhood']
+        }
+            
+    except:
+        return {'err':True}
